@@ -1,0 +1,215 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  /* ARES custom tokens */
+  --color-ares-cyan: var(--ares-cyan);
+  --color-ares-cyan-dim: var(--ares-cyan-dim);
+  --color-ares-orange: var(--ares-orange);
+  --color-ares-red: var(--ares-red);
+  --color-ares-green: var(--ares-green);
+  --color-ares-yellow: var(--ares-yellow);
+  --color-ares-panel: var(--ares-panel);
+  --color-ares-panel-border: var(--ares-panel-border);
+  --color-ares-surface: var(--ares-surface);
+}
+
+:root {
+  --radius: 0.5rem;
+  --background: oklch(0.08 0.01 240);
+  --foreground: oklch(0.95 0.01 240);
+  --card: oklch(0.10 0.015 240);
+  --card-foreground: oklch(0.95 0.01 240);
+  --popover: oklch(0.12 0.015 240);
+  --popover-foreground: oklch(0.95 0.01 240);
+  --primary: oklch(0.65 0.18 195);
+  --primary-foreground: oklch(0.08 0.01 240);
+  --secondary: oklch(0.14 0.02 240);
+  --secondary-foreground: oklch(0.85 0.01 240);
+  --muted: oklch(0.14 0.015 240);
+  --muted-foreground: oklch(0.55 0.02 240);
+  --accent: oklch(0.18 0.02 240);
+  --accent-foreground: oklch(0.9 0.01 240);
+  --destructive: oklch(0.60 0.22 25);
+  --destructive-foreground: oklch(0.95 0 0);
+  --border: oklch(0.22 0.02 240);
+  --input: oklch(0.16 0.015 240);
+  --ring: oklch(0.65 0.18 195);
+  --chart-1: oklch(0.65 0.18 195);
+  --chart-2: oklch(0.65 0.20 140);
+  --chart-3: oklch(0.65 0.20 60);
+  --chart-4: oklch(0.65 0.22 25);
+  --chart-5: oklch(0.70 0.18 270);
+  /* ARES custom */
+  --ares-cyan: oklch(0.75 0.18 195);
+  --ares-cyan-dim: oklch(0.55 0.12 195);
+  --ares-orange: oklch(0.70 0.20 50);
+  --ares-red: oklch(0.60 0.22 25);
+  --ares-green: oklch(0.65 0.18 145);
+  --ares-yellow: oklch(0.80 0.18 85);
+  --ares-panel: oklch(0.10 0.015 240 / 0.85);
+  --ares-panel-border: oklch(0.30 0.05 195 / 0.4);
+  --ares-surface: oklch(0.13 0.02 240);
+}
+
+.dark {
+  --background: oklch(0.08 0.01 240);
+  --foreground: oklch(0.95 0.01 240);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+/* ARES custom utilities */
+.ares-panel {
+  background: var(--ares-panel);
+  border: 1px solid var(--ares-panel-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.ares-glow-cyan {
+  box-shadow: 0 0 20px oklch(0.65 0.18 195 / 0.15), 0 0 40px oklch(0.65 0.18 195 / 0.05);
+}
+
+.ares-glow-red {
+  box-shadow: 0 0 20px oklch(0.60 0.22 25 / 0.25), 0 0 40px oklch(0.60 0.22 25 / 0.10);
+}
+
+.ares-text-cyan {
+  color: var(--ares-cyan);
+}
+
+.ares-border-cyan {
+  border-color: var(--ares-cyan-dim);
+}
+
+.scanline {
+  position: relative;
+  overflow: hidden;
+}
+
+.scanline::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    oklch(0 0 0 / 0.03) 2px,
+    oklch(0 0 0 / 0.03) 4px
+  );
+  pointer-events: none;
+}
+
+.holographic-grid {
+  background-image:
+    linear-gradient(oklch(0.65 0.18 195 / 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(0.65 0.18 195 / 0.06) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+@keyframes pulse-cyan {
+  0%, 100% { box-shadow: 0 0 8px oklch(0.65 0.18 195 / 0.4); }
+  50% { box-shadow: 0 0 20px oklch(0.65 0.18 195 / 0.8), 0 0 40px oklch(0.65 0.18 195 / 0.3); }
+}
+
+@keyframes pulse-red {
+  0%, 100% { box-shadow: 0 0 8px oklch(0.60 0.22 25 / 0.4); opacity: 1; }
+  50% { box-shadow: 0 0 24px oklch(0.60 0.22 25 / 0.9), 0 0 48px oklch(0.60 0.22 25 / 0.4); opacity: 0.8; }
+}
+
+@keyframes radar-sweep {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes data-flow {
+  from { stroke-dashoffset: 100; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes terminal-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes float-up {
+  from { transform: translateY(4px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes route-draw {
+  from { stroke-dashoffset: 1000; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-2px, -1px); }
+  20% { transform: translate(2px, 1px); }
+  30% { transform: translate(-1px, 2px); }
+  40% { transform: translate(1px, -2px); }
+  50% { transform: translate(-2px, 1px); }
+  60% { transform: translate(2px, -1px); }
+  70% { transform: translate(-1px, -2px); }
+  80% { transform: translate(1px, 2px); }
+  90% { transform: translate(-2px, -1px); }
+}
+
+.animate-pulse-cyan { animation: pulse-cyan 2s ease-in-out infinite; }
+.animate-pulse-red { animation: pulse-red 1.5s ease-in-out infinite; }
+.animate-radar { animation: radar-sweep 3s linear infinite; }
+.animate-float-up { animation: float-up 0.3s ease-out forwards; }
+.animate-shake { animation: shake 0.5s ease-in-out; }
+.animate-terminal-blink { animation: terminal-blink 1s step-end infinite; }
+
+/* Font for data/monospace readouts */
+.font-mono-data {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  font-feature-settings: 'tnum';
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: oklch(0.10 0.01 240); }
+::-webkit-scrollbar-thumb { background: oklch(0.30 0.05 195); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: oklch(0.45 0.12 195); }
